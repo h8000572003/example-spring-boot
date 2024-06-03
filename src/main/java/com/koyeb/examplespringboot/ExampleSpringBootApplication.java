@@ -2,18 +2,24 @@ package com.koyeb.examplespringboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+//@EnableWebMvc
 @SpringBootApplication
-@RestController
+@Controller
 public class ExampleSpringBootApplication {
     public static void main(String[] args) {
-      SpringApplication.run(ExampleSpringBootApplication.class, args);
+        SpringApplication.run(ExampleSpringBootApplication.class, args);
     }
 
+    //    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/").setViewName("forward:/index.html");
+//    }
     @GetMapping("/")
-    public String hello() {
-      return String.format("Hello world!");
+    public String index() {
+        return "forward:/index.html";
     }
+
 }
