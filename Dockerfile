@@ -9,6 +9,6 @@ RUN ./mvnw package
 FROM eclipse-temurin:17-jdk-alpine AS runner
 
 WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=builder /app/target/*.war app.war
 
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.war"]
