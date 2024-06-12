@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="DB2Tables" targetRuntime="MyBatis3DynamicSql">
+        <commentGenerator type="org.mybatis.generator.internal.DefaultCommentGenerator"
+               >
+            <property name="author" value="6407" />
+            <property name="dateFormat" value="yyyy/MM/dd" />
+            <property name="suppressAllComments" value="false" />
+            <property name="suppressDate" value="false" />
+            <property name="addRemarkComments" value="true" />
+        </commentGenerator>
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://localhost:5432/db1"
+                        userId="postgres"
+                        password="postgres"/>
+
+        <javaModelGenerator targetPackage="com.example.model" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.mapper" targetProject="src/main/java"/>
+
+
+        <table tableName="order" />
+
+    </context>
+</generatorConfiguration>
