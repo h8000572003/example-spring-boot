@@ -1,4 +1,4 @@
-package org.h800570023.order.api.rest.craete;
+package org.h800570023.order.api.rest.custom.craete;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

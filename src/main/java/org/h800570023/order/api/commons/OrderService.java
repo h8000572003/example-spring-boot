@@ -1,8 +1,9 @@
 package org.h800570023.order.api.commons;
 
 import lombok.RequiredArgsConstructor;
-import org.h800570023.order.api.rest.craete.CreateOrderReposeDTO;
-import org.h800570023.order.api.rest.craete.CreateOrderRequestDTO;
+import org.h800570023.order.api.rest.custom.craete.CreateOrderReposeDTO;
+import org.h800570023.order.api.rest.custom.craete.CreateOrderRequestDTO;
+import org.h800570023.order.api.rest.custom.query.QuertCustomTickeRequestDTO;
 import org.h800570023.order.api.rest.ticket.apply.ApplyUserTickeReposeDTO;
 import org.h800570023.order.api.rest.ticket.apply.ApplyUserTickeRequestDTO;
 import org.h800570023.order.api.rest.ticket.query.QuertUserTickeReposeDTO;
@@ -102,6 +103,11 @@ public class OrderService {
         List<Ticket> select = getTickets(query);
 
 
+        QuertUserTickeReposeDTO result = mapByTicket(select);
+        return result;
+    }
+
+    private QuertUserTickeReposeDTO mapByTicket(List<Ticket> select) {
         QuertUserTickeReposeDTO result = new QuertUserTickeReposeDTO();
 
 
@@ -241,4 +247,16 @@ public class OrderService {
                 .map(i -> i.getQuantity()).findAny().orElse(0);
     }
 
+    public QuertUserTickeReposeDTO queryCustom(QuertCustomTickeRequestDTO query) {
+        if (!StringUtils.hasText(query.getName())) {
+            throw new ApBusinessException("請輸入購買人姓名");
+        }
+        if (!StringUtils.hasText(query.getPhone())) {
+            throw new ApBusinessException("請輸入電話");
+        }
+        return this.mapByTicket(ticketMapper.select(s -> s
+                .where(TicketDynamicSqlSupport.orderName, SqlBuilder.isEqualTo(query.getName()))
+                .and(TicketDynamicSqlSupport.orderTel, SqlBuilder.isEqualTo(query.getPhone())
+                )).stream().toList());
+    }
 }

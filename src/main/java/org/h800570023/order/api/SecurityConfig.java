@@ -31,10 +31,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // 禁用CSRF
                 .cors(cors -> cors.disable()) // 禁用CORS
                 .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers(HttpMethod.GET, "/index**", "/static/**", "/*.js", "/*.json", "/*.ico", "/", "/assets/**.js", "/assets/**.css","/images/**","/**.svg","login").permitAll()
-//                        .requestMatchers(HttpMethod.POST,  "api/login", "api/customer/createOrder", "api/user/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/asserts/**.css","/asserts/**.js","/index**", "/static/**", "/*.js", "/*.json", "/*.ico", "/", "/assets/**.js", "/assets/**.css","/images/**","/**.svg","login").permitAll()
+//                        .requestMatchers(HttpMethod.POST,  "api/login", "api/customer/**", "api/user/**").permitAll()
                         .anyRequest().permitAll()
-//                        .anyRequest().authenticated()
                 );
 //                .formLogin(form -> form
 //                        .loginProcessingUrl("/api/login")
@@ -49,10 +48,7 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173","https://6281-118-150-214-161.ngrok-free.app","http://localhost:3000","" +
-                                "http://localhost:8000" ,
-                                "http://localhost:8080" ,
-                                "https://convincing-brandy-andytsia-d4b231f3.koyeb.app")
+                        .allowedOrigins("http://localhost:5173","https://6281-118-150-214-161.ngrok-free.app","http://localhost:3000")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
