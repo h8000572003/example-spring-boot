@@ -49,7 +49,10 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173","https://6281-118-150-214-161.ngrok-free.app","http://localhost:3000")
+                        .allowedOrigins("http://localhost:5173","https://6281-118-150-214-161.ngrok-free.app","http://localhost:3000","" +
+                                "http://localhost:8000" ,
+                                "http://localhost:8080" ,
+                                "https://convincing-brandy-andytsia-d4b231f3.koyeb.app")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
