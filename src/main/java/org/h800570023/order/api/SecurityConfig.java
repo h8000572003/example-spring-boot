@@ -31,9 +31,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // 禁用CSRF
                 .cors(cors -> cors.disable()) // 禁用CORS
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/asserts/**.css","/asserts/**.js","/index**", "/static/**", "/*.js", "/*.json", "/*.ico", "/", "/assets/**.js", "/assets/**.css","/images/**","/**.svg","login").permitAll()
-                        .requestMatchers(HttpMethod.POST,  "api/login", "api/customer/createOrder", "api/user/**").permitAll()
-                        .anyRequest().authenticated()
+//                        .requestMatchers(HttpMethod.GET, "/index**", "/static/**", "/*.js", "/*.json", "/*.ico", "/", "/assets/**.js", "/assets/**.css","/images/**","/**.svg","login").permitAll()
+//                        .requestMatchers(HttpMethod.POST,  "api/login", "api/customer/createOrder", "api/user/**").permitAll()
+                        .anyRequest().permitAll()
+//                        .anyRequest().authenticated()
                 );
 //                .formLogin(form -> form
 //                        .loginProcessingUrl("/api/login")
