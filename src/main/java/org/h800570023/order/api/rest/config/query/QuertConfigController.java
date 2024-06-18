@@ -1,37 +1,33 @@
-package org.h800570023.order.api.rest.ticket.query;
+package org.h800570023.order.api.rest.config.query;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.h800570023.order.api.commons.ApBusinessException;
-import org.h800570023.order.api.commons.OrderService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.h800570023.order.api.rest.config.ConfigService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/user")
-public class QuertUserTicketController {
+@RequestMapping("/api/user/config")
+public class QuertConfigController {
 
 
-    private final OrderService orderService;
+    private final ConfigService service;
 
     @PostMapping("/query")
-    public QuertUserTickeReposeDTO creatOrder(@RequestBody QuertUserTickeRequestDTO query) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        QuertUserTickeReposeDTO order = new QuertUserTickeReposeDTO();
+    public QueryConfigReposeDTO creatOrder() {
+        QueryConfigReposeDTO order = new QueryConfigReposeDTO();
         try {
-            return orderService.query(query);
+            return service.query();
         } catch (ApBusinessException e) {
             log.info("createOrder error", e);
             order.setExCode("X");
             order.setExMessage(e.getMessage());
             return order;
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.info("createOrder error", e);
             order.setExCode("X");
             order.setExMessage("系統異常");

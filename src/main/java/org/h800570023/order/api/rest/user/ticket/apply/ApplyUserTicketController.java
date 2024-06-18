@@ -1,4 +1,4 @@
-package org.h800570023.order.api.rest.ticket.apply;
+package org.h800570023.order.api.rest.user.ticket.apply;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

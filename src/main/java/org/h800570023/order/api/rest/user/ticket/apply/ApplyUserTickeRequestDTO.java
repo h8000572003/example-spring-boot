@@ -1,7 +1,7 @@
-package org.h800570023.order.api.rest.ticket.apply;
+package org.h800570023.order.api.rest.user.ticket.apply;
 
 import lombok.Data;
-import org.h800570023.order.api.rest.ticket.query.QuertUserTickeReposeDTO;
+import org.h800570023.order.api.rest.user.ticket.query.QuertUserTickeReposeDTO;
 
 import java.util.ArrayList;
 import java.util.Date;

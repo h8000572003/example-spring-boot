@@ -52,7 +52,7 @@ public class SecurityConfig {
                         .allowedOrigins("http://localhost:5173","https://6281-118-150-214-161.ngrok-free.app","http://localhost:3000","" +
                                         "http://localhost:8000" ,
                                 "http://localhost:8080" ,
-                                "https://convincing-brandy-andytsia-d4b231f3.koyeb.app")
+                                "https://convincing-brandy-andytsia-d4b231f3.koyeb.app","https://e6be-118-150-214-161.ngrok-free.app")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
@@ -62,8 +62,8 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return new InMemoryUserDetailsManager(
-                User.withUsername("user")
-                        .password(passwordEncoder().encode("password"))
+                User.withUsername("29240708")
+                        .password(passwordEncoder().encode("Test!@#$1234"))
                         .roles("USER")
                         .build()
         );

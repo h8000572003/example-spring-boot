@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.h800570023.order.api.rest.custom.craete.CreateOrderReposeDTO;
 import org.h800570023.order.api.rest.custom.craete.CreateOrderRequestDTO;
 import org.h800570023.order.api.rest.custom.query.QuertCustomTickeRequestDTO;
-import org.h800570023.order.api.rest.ticket.apply.ApplyUserTickeReposeDTO;
-import org.h800570023.order.api.rest.ticket.apply.ApplyUserTickeRequestDTO;
-import org.h800570023.order.api.rest.ticket.query.QuertUserTickeReposeDTO;
-import org.h800570023.order.api.rest.ticket.query.QuertUserTickeRequestDTO;
+import org.h800570023.order.api.rest.user.ticket.apply.ApplyUserTickeReposeDTO;
+import org.h800570023.order.api.rest.user.ticket.apply.ApplyUserTickeRequestDTO;
+import org.h800570023.order.api.rest.user.ticket.query.QuertUserTickeReposeDTO;
+import org.h800570023.order.api.rest.user.ticket.query.QuertUserTickeRequestDTO;
 import org.h800570023.order.codes.*;
 import org.h800570023.order.mapper.TicketDynamicSqlSupport;
 import org.h800570023.order.mapper.TicketMapper;
@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +31,7 @@ public class OrderService {
 
     private final CommonService commonService;
     private final CodeService codeService;
+    private final LineNotify lineNotify;
 
     public CreateOrderReposeDTO createOrder(CreateOrderRequestDTO createOrderRequestDTO) {
         String transactionId = commonService.getTransactionId();
@@ -64,6 +66,15 @@ public class OrderService {
 
         CreateOrderReposeDTO createOrderReposeDTO = new CreateOrderReposeDTO();
         createOrderReposeDTO.setTransactionId(transactionId);
+
+
+        String items = createOrderRequestDTO.getItems().stream().filter(i -> i.getQuantity() > 0).map(i -> {
+            return ItemCodes.valueOf(i.getTitle()).getText()
+                    + ":" + i.getQuantity() + "\n";
+        }).collect(Collectors.joining());
+
+        lineNotify.sendLineNotify("收到新的訂單:訂單號碼" + transactionId + "\n姓名:" + createOrderRequestDTO.getName()
+                + "\n電話:" + createOrderRequestDTO.getPhone() + "\n品項：\n" + items);
         return createOrderReposeDTO;
     }
 

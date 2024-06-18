@@ -1,33 +1,27 @@
-package org.h800570023.order.api.rest.custom.query;
+package org.h800570023.order.api.rest.user.notice;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.h800570023.order.api.BaseReposeDTO;
 import org.h800570023.order.api.commons.ApBusinessException;
-import org.h800570023.order.api.commons.OrderService;
-import org.h800570023.order.api.rest.user.ticket.query.QuertUserTickeReposeDTO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RestController
+@Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/api/customer")
-public class QuertCustomTicketController {
+@RequestMapping("/api/user")
+public class UserNotfrontroller {
+    private final NotifyService notfiyService;
 
-
-    private final OrderService orderService;
-
-    @PostMapping("/query")
-    public QuertUserTickeReposeDTO creatOrder(@RequestBody QuertCustomTickeRequestDTO query) {
-        QuertUserTickeReposeDTO order = new QuertUserTickeReposeDTO();
+    @PostMapping("/line")
+    public BaseReposeDTO creatOrder(@RequestBody NotifyRequestDTO query) {
+        BaseReposeDTO order = new BaseReposeDTO();
         try {
-            QuertUserTickeReposeDTO quertUserTickeReposeDTO = orderService.queryCustom(query);
-            if (quertUserTickeReposeDTO.getTickets().isEmpty()) {
-                throw new ApBusinessException("查無資料確定輸入條件正確");
-            }
-            return quertUserTickeReposeDTO;
+            notfiyService.update(query);
+            return order;
         } catch (ApBusinessException e) {
             log.info("createOrder error", e);
             order.setExCode("X");

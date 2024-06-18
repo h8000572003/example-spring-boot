@@ -1,4 +1,4 @@
-package org.h800570023.order.api.rest.ticket.query;
+package org.h800570023.order.api.rest.user.ticket.query;
 
 import lombok.Data;
 import org.h800570023.order.api.BaseReposeDTO;

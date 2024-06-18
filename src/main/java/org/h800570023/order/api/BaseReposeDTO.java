@@ -1,8 +1,8 @@
 package org.h800570023.order.api;
 
 public class BaseReposeDTO {
-    private String exCode;
-    private String exMessage;
+    private String exCode="O";
+    private String exMessage="";
 
     public String getExCode() {
         return this.exCode;
