@@ -41,9 +41,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private boolean tokenIsValid(String token) {
-        return false;
-    }
 }
 
 
