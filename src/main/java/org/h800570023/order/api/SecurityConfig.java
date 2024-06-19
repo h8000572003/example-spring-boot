@@ -52,7 +52,7 @@ public class SecurityConfig {
                         .allowedOrigins("http://localhost:5173","https://6281-118-150-214-161.ngrok-free.app","http://localhost:3000","" +
                                         "http://localhost:8000" ,
                                 "http://localhost:8080" ,
-                                "https://70b5-118-150-214-161.ngrok-free.app")
+                                "https://convincing-brandy-andytsia-d4b231f3.koyeb.app","https://e6be-118-150-214-161.ngrok-free.app")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
