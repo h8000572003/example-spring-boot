@@ -7,6 +7,7 @@ import org.h800570023.order.model.LineUser;
 import org.mybatis.dynamic.sql.SqlBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -22,16 +23,18 @@ public class NotifyService {
     private final LineUserMapper lineUserMapper;
 
     @Transactional
-    public   void update(NotifyRequestDTO query) {
-
-        int count = lineUserMapper.update(s -> s.set(LineUserDynamicSqlSupport.isNotify).equalTo("Y")
-                .where(LineUserDynamicSqlSupport.id, SqlBuilder.isEqualTo(query.getToke())));
-        if (count == 0) {
-            LineUser lineUser = new LineUser();
-            lineUser.setIsNotify("Y");
-            lineUser.setId(query.getToke());
-            lineUserMapper.insert(lineUser);
+    public void update(NotifyRequestDTO query) {
+        if (StringUtils.hasText(query.getToke())) {
+            int count = lineUserMapper.update(s -> s.set(LineUserDynamicSqlSupport.isNotify).equalTo("Y")
+                    .where(LineUserDynamicSqlSupport.id, SqlBuilder.isEqualTo(query.getToke())));
+            if (count == 0) {
+                LineUser lineUser = new LineUser();
+                lineUser.setIsNotify("Y");
+                lineUser.setId(query.getToke());
+                lineUserMapper.insert(lineUser);
+            }
         }
+
 
     }
 
