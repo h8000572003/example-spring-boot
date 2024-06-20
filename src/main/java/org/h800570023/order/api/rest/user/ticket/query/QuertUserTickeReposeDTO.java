@@ -4,7 +4,6 @@ import lombok.Data;
 import org.h800570023.order.api.BaseReposeDTO;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -17,7 +16,7 @@ public class QuertUserTickeReposeDTO extends BaseReposeDTO {
         private String transactionId;
         private String name;
         private String phone;
-        private Date pickupTime;
+        private String pickupTime;
         private String status;
         private String temperature;
         private int total;
@@ -26,6 +25,7 @@ public class QuertUserTickeReposeDTO extends BaseReposeDTO {
         private String memo;
         private String storeMemo;
         private int deposit;
+        private String changeLog = "";
         private List<CreateOrderRequestItemDTO> items = new ArrayList<>();
     }
 

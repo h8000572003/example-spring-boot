@@ -13,7 +13,7 @@ public class ApplyUserTickeRequestDTO {
     private String transactionId;
     private String name;
     private String phone;
-    private Date pickupTime;
+    private String pickupTime;
     private String status;
     private String temperature;
     private int total;
