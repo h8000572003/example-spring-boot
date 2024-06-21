@@ -28,7 +28,7 @@ public class LineController {
     private static final String CLIENT_SECRET = "nCGH27NX66Z4WkabMRePA8SzrrFkQMKELSSsVjnC4qu";
     private static final String AUTHORIZATION_URL = "https://notify-bot.line.me/oauth/authorize";
     private static final String TOKEN_URL = "https://notify-bot.line.me/oauth/token";
-    public static final String URL = "https://valid-fly-andytsia-ca62b3f7.koyeb.app/api/callback";
+    public static final String URL = "https://example-spring-boot-k5ty.onrender.com/api/callback";
 
     private final NotifyService notifyService;
 

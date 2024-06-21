@@ -16,7 +16,7 @@ package org.h800570023.order.api.commons;//package org.h800570023.order.api.comm
 //
 //    private static final String CLIENT_ID = "88kDIn539twSiZ4XrukC2W";
 //    private static final String CLIENT_SECRET = "nCGH27NX66Z4WkabMRePA8SzrrFkQMKELSSsVjnC4qu";
-//    private static final String REDIRECT_URI = "https://valid-fly-andytsia-ca62b3f7.koyeb.app";
+//    private static final String REDIRECT_URI = "https://example-spring-boot-k5ty.onrender.com";
 //    private static final String AUTHORIZATION_URL = "https://notify-bot.line.me/oauth/authorize";
 //    private static final String TOKEN_URL = "https://notify-bot.line.me/oauth/token";
 //
