@@ -10,7 +10,7 @@ import java.util.List;
 public class CreateOrderRequestDTO {
     private String name;
     private String phone;
-    private String pickupTime;//取貨日期
+    private Date pickupTime;//取貨日期
     private String email;
     private String pickupCode;//取貨時間
     private String memo;

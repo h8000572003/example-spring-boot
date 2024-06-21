@@ -11,7 +11,7 @@ public class QuertUserTickeRequestDTO {
     private String status;
     private String name;
     private String phone;
-    private String pickupTime;
+    private Date pickupTime;
     private String pickupCode;
     private String temperature;
 }

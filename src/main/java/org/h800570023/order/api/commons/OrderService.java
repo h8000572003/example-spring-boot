@@ -1,11 +1,9 @@
 package org.h800570023.order.api.commons;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.h800570023.order.api.rest.custom.craete.CreateOrderReposeDTO;
 import org.h800570023.order.api.rest.custom.craete.CreateOrderRequestDTO;
 import org.h800570023.order.api.rest.custom.query.QuertCustomTickeRequestDTO;
-import org.h800570023.order.api.rest.user.ticket.apply.ApplyStatusUserRequestDTO;
 import org.h800570023.order.api.rest.user.ticket.apply.ApplyUserTickeReposeDTO;
 import org.h800570023.order.api.rest.user.ticket.apply.ApplyUserTickeRequestDTO;
 import org.h800570023.order.api.rest.user.ticket.query.QuertUserTickeReposeDTO;
@@ -15,25 +13,22 @@ import org.h800570023.order.mapper.TicketDynamicSqlSupport;
 import org.h800570023.order.mapper.TicketMapper;
 import org.h800570023.order.model.Ticket;
 import org.mybatis.dynamic.sql.SqlBuilder;
-import org.mybatis.dynamic.sql.render.RenderingStrategies;
-import org.mybatis.dynamic.sql.update.UpdateDSL;
-import org.mybatis.dynamic.sql.update.UpdateModel;
-import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.where.WhereDSL;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final TicketMapper ticketMapper;
+
     private final CommonService commonService;
     private final CodeService codeService;
     private final LineNotify lineNotify;
@@ -117,6 +112,8 @@ public class OrderService {
 
     public QuertUserTickeReposeDTO query(QuertUserTickeRequestDTO query) {
         List<Ticket> select = getTickets(query);
+
+
         QuertUserTickeReposeDTO result = mapByTicket(select);
         return result;
     }
@@ -139,7 +136,7 @@ public class OrderService {
             createOrderRequestTicketDTO.setMemo(i.getCustomerMemo());
             createOrderRequestTicketDTO.setStoreMemo(i.getApplyMemo());
             createOrderRequestTicketDTO.setDeposit(i.getDeposit());
-            createOrderRequestTicketDTO.setChangeLog(i.getChangeLog());
+
             List<QuertUserTickeReposeDTO.CreateOrderRequestItemDTO> items = new ArrayList<>();
             add(items, i.getItemACount(), ItemCodes.A.getCode());
             add(items, i.getItemBCount(), ItemCodes.B.getCode());
@@ -159,31 +156,31 @@ public class OrderService {
     private List<Ticket> getTickets(QuertUserTickeRequestDTO query) {
         final WhereDSL.StandaloneWhereFinisher where = SqlBuilder.where();
         boolean hasWhere = false;
-        if (StringUtils.isNotBlank(query.getTransactionId())) {
+        if (StringUtils.hasText(query.getTransactionId())) {
             where.and(TicketDynamicSqlSupport.transactionId, SqlBuilder.isLike("%" + query.getTransactionId()));
             hasWhere = true;
         }
-        if (StringUtils.isNotBlank(query.getName())) {
+        if (StringUtils.hasText(query.getName())) {
             where.and(TicketDynamicSqlSupport.orderName, SqlBuilder.isLike(query.getName() + "%"));
             hasWhere = true;
         }
-        if (StringUtils.isNotBlank(query.getStatus())) {
+        if (StringUtils.hasText(query.getStatus())) {
             where.and(TicketDynamicSqlSupport.status, SqlBuilder.isEqualTo(query.getStatus()));
             hasWhere = true;
         }
-        if (StringUtils.isNotBlank(query.getPhone())) {
+        if (StringUtils.hasText(query.getPhone())) {
             where.and(TicketDynamicSqlSupport.orderTel, SqlBuilder.isLike(query.getPhone() + "%"));
             hasWhere = true;
         }
-        if (StringUtils.isNotBlank(query.getPickupTime())) {
+        if (query.getPickupTime() != null) {
             where.and(TicketDynamicSqlSupport.pickupDate, SqlBuilder.isEqualTo(query.getPickupTime()));
             hasWhere = true;
         }
-        if (StringUtils.isNotBlank(query.getPickupCode())) {
+        if (StringUtils.hasText(query.getPickupCode())) {
             where.and(TicketDynamicSqlSupport.pickup, SqlBuilder.isLike(query.getPickupCode()));
             hasWhere = true;
         }
-        if (StringUtils.isNotBlank(query.getTemperature())) {
+        if (StringUtils.hasText(query.getTemperature())) {
             where.and(TicketDynamicSqlSupport.temperature, SqlBuilder.isEqualTo(query.getTemperature()));
             hasWhere = true;
         }
@@ -211,46 +208,15 @@ public class OrderService {
         items.add(itemDTO);
     }
 
-
-    @Transactional
-    public void apply(ApplyStatusUserRequestDTO query) {
-        UpdateDSL<UpdateModel> update = SqlBuilder.update(TicketDynamicSqlSupport.ticket);
-        update.set(TicketDynamicSqlSupport.status).equalTo(TicketStatus.valueOf(query.getNewStatus()).getCode())
-                .set(TicketDynamicSqlSupport.applyMemo).equalTo(query.getStoreMemo())
-                .set(TicketDynamicSqlSupport.changeLog).equalTo(getNewLog("狀態變更:" + codeService.getText(CodeSets.TICKET_STATUS, query.getStatus()) + "更正為 " + codeService.getText(CodeSets.TICKET_STATUS, query.getNewStatus()), query.getTransactionId()))
-                .set(TicketDynamicSqlSupport.updateTime).equalTo(new Date());
-        if (EnumSet.of(TicketStatus.D, TicketStatus.E).contains(TicketStatus.valueOf(query.getNewStatus()))) {
-            update.set(TicketDynamicSqlSupport.closeDate).equalTo(new Date());
-        }
-
-
-        update.where(TicketDynamicSqlSupport.transactionId, SqlBuilder.isEqualTo(query.getTransactionId()))
-                .and(TicketDynamicSqlSupport.status, SqlBuilder.isEqualTo(query.getStatus()));
-        UpdateStatementProvider updateStatement = update.build().render(RenderingStrategies.MYBATIS3);
-        ticketMapper.update(updateStatement);
-
-
+    public ApplyUserTickeReposeDTO apply(ApplyUserTickeRequestDTO query) {
+        query.setStatus(TicketStatus.C.getCode());
+        return updateTicket(query);
     }
 
-    private String getNewLog(String newChange, String transactionId) {
-        Optional<Ticket> ticket = ticketMapper.selectOne(s -> s.where(TicketDynamicSqlSupport.transactionId, SqlBuilder.isEqualTo(transactionId)));
-        StringBuffer changeLog = new StringBuffer();
-        if (ticket.isPresent()) {
-            String changeLog1 = ticket.get().getChangeLog();
-            if (StringUtils.isNotBlank(changeLog1)) {
-                changeLog.append(changeLog1 + "\n");
-            }
-
-        }
-        changeLog.append(getNow() + "." + newChange);
-        return changeLog.toString();
-    }
-
-    private ApplyUserTickeReposeDTO updateTicket(ApplyUserTickeRequestDTO query, String newChagne) {
+    private ApplyUserTickeReposeDTO updateTicket(ApplyUserTickeRequestDTO query) {
         Integer total = query.getItems().stream().map(i -> {
             return i.getQuantity() * i.getPrice();
         }).reduce(0, Integer::sum);
-        final String newLog = getNewLog(newChagne, query.getTransactionId());
         ticketMapper.update(u -> u
                 .set(TicketDynamicSqlSupport.status).equalTo(TicketStatus.C.getCode())
                 .set(TicketDynamicSqlSupport.total).equalTo(total)
@@ -262,74 +228,29 @@ public class OrderService {
                 .set(TicketDynamicSqlSupport.temperature).equalTo(query.getTemperature())
                 .set(TicketDynamicSqlSupport.deposit).equalTo(query.getDeposit())
                 .set(TicketDynamicSqlSupport.applyMemo).equalTo(query.getStoreMemo())
-                .set(TicketDynamicSqlSupport.changeLog).equalTo(newLog)
                 .set(TicketDynamicSqlSupport.itemACount).equalTo(getCount(query, ItemCodes.A))
                 .set(TicketDynamicSqlSupport.itemBCount).equalTo(getCount(query, ItemCodes.B))
                 .set(TicketDynamicSqlSupport.itemCCount).equalTo(getCount(query, ItemCodes.C))
                 .set(TicketDynamicSqlSupport.itemDCount).equalTo(getCount(query, ItemCodes.D))
                 .set(TicketDynamicSqlSupport.itemECount).equalTo(getCount(query, ItemCodes.E))
                 .set(TicketDynamicSqlSupport.itemFCount).equalTo(getCount(query, ItemCodes.F))
-                .set(TicketDynamicSqlSupport.updateTime).equalTo(new Date())
                 .where(TicketDynamicSqlSupport.transactionId, SqlBuilder.isEqualTo(query.getTransactionId())));
         ApplyUserTickeReposeDTO applyUserTickeReposeDTO = new ApplyUserTickeReposeDTO();
         return applyUserTickeReposeDTO;
     }
 
+    public ApplyUserTickeReposeDTO reject(ApplyUserTickeRequestDTO query) {
+        ticketMapper.update(u -> u
+                .set(TicketDynamicSqlSupport.status).equalTo(TicketStatus.D.getCode())
+                .set(TicketDynamicSqlSupport.closeDate).equalTo(new Date())
+                .set(TicketDynamicSqlSupport.applyMemo).equalTo(query.getStoreMemo())
+                .where(TicketDynamicSqlSupport.transactionId, SqlBuilder.isEqualTo(query.getTransactionId())));
+        ApplyUserTickeReposeDTO applyUserTickeReposeDTO = new ApplyUserTickeReposeDTO();
+        return applyUserTickeReposeDTO;
+    }
 
-    @Transactional
     public ApplyUserTickeReposeDTO update(ApplyUserTickeRequestDTO query) {
-
-        List<Ticket> ticks = ticketMapper.select(s -> s.where(TicketDynamicSqlSupport.transactionId, SqlBuilder.isEqualTo(query.getTransactionId())));
-        if (ticks.isEmpty()) {
-            throw new ApBusinessException("找不到訂單");
-        }
-        StringBuffer stringBuffer = new StringBuffer();
-        Ticket ticket = ticks.get(0);
-        addNote(stringBuffer, "訂購人：", ticket.getOrderName(), query.getName());
-        addNote(stringBuffer, "電話：", ticket.getOrderTel(), query.getPhone());
-        addNote(stringBuffer, "取貨時間：", ticket.getPickupDate(), query.getPickupTime());
-        addNote(stringBuffer, "取貨地點：", ticket.getPickup(), query.getPickupCode());
-        addNoteIfCode(stringBuffer, "溫度：", ticket.getTemperature(), query.getTemperature(), CodeSets.TEMPERATURE_CODES);
-
-        addNote(stringBuffer, "訂金：", ticket.getDeposit(), query.getDeposit());
-
-        addNote(stringBuffer, "客戶備註：", ticket.getCustomerMemo(), query.getMemo());
-        addNote(stringBuffer, "店家備註：", ticket.getApplyMemo(), query.getStoreMemo());
-        List<QuertUserTickeReposeDTO.CreateOrderRequestItemDTO> items = query.getItems();
-        for (QuertUserTickeReposeDTO.CreateOrderRequestItemDTO item : items) {
-            check(item, ItemCodes.A, () -> ticket.getItemACount(), stringBuffer);
-            check(item, ItemCodes.B, () -> ticket.getItemBCount(), stringBuffer);
-            check(item, ItemCodes.C, () -> ticket.getItemCCount(), stringBuffer);
-            check(item, ItemCodes.D, () -> ticket.getItemDCount(), stringBuffer);
-            check(item, ItemCodes.E, () -> ticket.getItemECount(), stringBuffer);
-            check(item, ItemCodes.F, () -> ticket.getItemFCount(), stringBuffer);
-        }
-
-
-        return updateTicket(query, stringBuffer.toString());
-    }
-
-    private void addNote(StringBuffer stringBuffer, String title, Object src, Object tar) {
-        if (!Objects.equals(src, tar)) {
-            stringBuffer.append(title + "從" + src + "變更為" + tar+" ");
-        }
-    }
-
-    private void addNoteIfCode(StringBuffer stringBuffer, String title, String src, String tar, CodeSets codeSets) {
-        if (!Objects.equals(src, tar)) {
-            stringBuffer.append(title + "從" + codeService.getText(codeSets, src) + "變更為" + codeService.getText(codeSets, tar) );
-        }
-    }
-
-    private void check(QuertUserTickeReposeDTO.CreateOrderRequestItemDTO item, ItemCodes a, IntSupplier tickCount, StringBuffer stringBuffer) {
-        if (Objects.equals(a.getCode(), item.getCode())) {
-            addNote(stringBuffer, a.getText() + ":", tickCount.getAsInt(), item.getQuantity());
-        }
-
-    }
-
-    private static String getNow() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return updateTicket(query);
     }
 
     private static int getCount(ApplyUserTickeRequestDTO query, ItemCodes itemCodes) {
@@ -338,10 +259,10 @@ public class OrderService {
     }
 
     public QuertUserTickeReposeDTO queryCustom(QuertCustomTickeRequestDTO query) {
-        if (!StringUtils.isNotBlank(query.getName())) {
+        if (!StringUtils.hasText(query.getName())) {
             throw new ApBusinessException("請輸入購買人姓名");
         }
-        if (!StringUtils.isNotBlank(query.getPhone())) {
+        if (!StringUtils.hasText(query.getPhone())) {
             throw new ApBusinessException("請輸入電話");
         }
         return this.mapByTicket(ticketMapper.select(s -> s
