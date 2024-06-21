@@ -15,339 +15,373 @@ public class Ticket {
      * Database Column Remarks:
      *   交易序號
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6842288+08:00", comments="Source field: ticket.transaction_id")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7247534+08:00", comments="Source field: ticket.transaction_id")
     private String transactionId;
 
     /**
      * Database Column Remarks:
      *   訂購人
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6902317+08:00", comments="Source field: ticket.order_name")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7317562+08:00", comments="Source field: ticket.order_name")
     private String orderName;
 
     /**
      * Database Column Remarks:
      *   訂購電話
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6902317+08:00", comments="Source field: ticket.order_tel")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7317562+08:00", comments="Source field: ticket.order_tel")
     private String orderTel;
 
     /**
      * Database Column Remarks:
      *   備註
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6912281+08:00", comments="Source field: ticket.customer_memo")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7317562+08:00", comments="Source field: ticket.customer_memo")
     private String customerMemo;
 
     /**
      * Database Column Remarks:
-     *   狀態 A:審查中 C:已接單  E:結案
+     *   狀態 A:審查中 C:已確認  E:結案
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6912281+08:00", comments="Source field: ticket.status")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7327544+08:00", comments="Source field: ticket.status")
     private String status;
 
     /**
      * Database Column Remarks:
      *   總金額
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6912281+08:00", comments="Source field: ticket.total")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7327544+08:00", comments="Source field: ticket.total")
     private Integer total;
 
     /**
      * Database Column Remarks:
      *   訂金
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6922292+08:00", comments="Source field: ticket.deposit")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7337614+08:00", comments="Source field: ticket.deposit")
     private Integer deposit;
 
     /**
      * Database Column Remarks:
      *   訂購日期
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6922292+08:00", comments="Source field: ticket.create_date")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7337614+08:00", comments="Source field: ticket.create_date")
     private Date createDate;
 
     /**
      * Database Column Remarks:
      *   預期取貨日期
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.693237+08:00", comments="Source field: ticket.pickup_date")
-    private Date pickupDate;
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7347832+08:00", comments="Source field: ticket.pickup_date")
+    private String pickupDate;
 
     /**
      * Database Column Remarks:
      *   結案日期
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.693237+08:00", comments="Source field: ticket.close_date")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7347832+08:00", comments="Source field: ticket.close_date")
     private Date closeDate;
 
     /**
      * Database Column Remarks:
      *   南部蛋黃肉粽數量
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.694243+08:00", comments="Source field: ticket.item_a_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7357777+08:00", comments="Source field: ticket.item_a_count")
     private Integer itemACount;
 
     /**
      * Database Column Remarks:
      *   南部粽數量
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.694243+08:00", comments="Source field: ticket.item_b_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7357777+08:00", comments="Source field: ticket.item_b_count")
     private Integer itemBCount;
 
     /**
      * Database Column Remarks:
      *   北部肉粽數量
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.694243+08:00", comments="Source field: ticket.item_c_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7357777+08:00", comments="Source field: ticket.item_c_count")
     private Integer itemCCount;
 
     /**
      * Database Column Remarks:
      *   白米豆沙數量
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6952341+08:00", comments="Source field: ticket.item_d_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7367763+08:00", comments="Source field: ticket.item_d_count")
     private Integer itemDCount;
 
     /**
      * Database Column Remarks:
      *   溫度:H:熱 C:冷凍 N:都行
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6952341+08:00", comments="Source field: ticket.temperature")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7367763+08:00", comments="Source field: ticket.temperature")
     private String temperature;
 
     /**
      * Database Column Remarks:
      *   處理備註
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6952341+08:00", comments="Source field: ticket.apply_memo")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7367763+08:00", comments="Source field: ticket.apply_memo")
     private String applyMemo;
 
     /**
      * Database Column Remarks:
      *   紅豆鹼粽
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6962348+08:00", comments="Source field: ticket.item_e_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7377779+08:00", comments="Source field: ticket.item_e_count")
     private Integer itemECount;
 
     /**
      * Database Column Remarks:
      *   原味鹼粽
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6962348+08:00", comments="Source field: ticket.item_f_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7377779+08:00", comments="Source field: ticket.item_f_count")
     private Integer itemFCount;
 
     /**
      * Database Column Remarks:
      *   取貨時段
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6962348+08:00", comments="Source field: ticket.pickup")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7387745+08:00", comments="Source field: ticket.pickup")
     private String pickup;
 
     /**
      * Database Column Remarks:
      *   email
      */
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6962348+08:00", comments="Source field: ticket.email")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7387745+08:00", comments="Source field: ticket.email")
     private String email;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6892311+08:00", comments="Source field: ticket.transaction_id")
+    /**
+     * Database Column Remarks:
+     *   更新時間
+     */
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7387745+08:00", comments="Source field: ticket.update_time")
+    private Date updateTime;
+
+    /**
+     * Database Column Remarks:
+     *   異動紀錄
+     */
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7397769+08:00", comments="Source field: ticket.change_log")
+    private String changeLog;
+
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7297591+08:00", comments="Source field: ticket.transaction_id")
     public String getTransactionId() {
         return transactionId;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6902317+08:00", comments="Source field: ticket.transaction_id")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7307595+08:00", comments="Source field: ticket.transaction_id")
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6902317+08:00", comments="Source field: ticket.order_name")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7317562+08:00", comments="Source field: ticket.order_name")
     public String getOrderName() {
         return orderName;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6902317+08:00", comments="Source field: ticket.order_name")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7317562+08:00", comments="Source field: ticket.order_name")
     public void setOrderName(String orderName) {
         this.orderName = orderName;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6902317+08:00", comments="Source field: ticket.order_tel")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7317562+08:00", comments="Source field: ticket.order_tel")
     public String getOrderTel() {
         return orderTel;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6912281+08:00", comments="Source field: ticket.order_tel")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7317562+08:00", comments="Source field: ticket.order_tel")
     public void setOrderTel(String orderTel) {
         this.orderTel = orderTel;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6912281+08:00", comments="Source field: ticket.customer_memo")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7317562+08:00", comments="Source field: ticket.customer_memo")
     public String getCustomerMemo() {
         return customerMemo;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6912281+08:00", comments="Source field: ticket.customer_memo")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7327544+08:00", comments="Source field: ticket.customer_memo")
     public void setCustomerMemo(String customerMemo) {
         this.customerMemo = customerMemo;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6912281+08:00", comments="Source field: ticket.status")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7327544+08:00", comments="Source field: ticket.status")
     public String getStatus() {
         return status;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6912281+08:00", comments="Source field: ticket.status")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7327544+08:00", comments="Source field: ticket.status")
     public void setStatus(String status) {
         this.status = status;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6912281+08:00", comments="Source field: ticket.total")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7327544+08:00", comments="Source field: ticket.total")
     public Integer getTotal() {
         return total;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6912281+08:00", comments="Source field: ticket.total")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7337614+08:00", comments="Source field: ticket.total")
     public void setTotal(Integer total) {
         this.total = total;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6922292+08:00", comments="Source field: ticket.deposit")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7337614+08:00", comments="Source field: ticket.deposit")
     public Integer getDeposit() {
         return deposit;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6922292+08:00", comments="Source field: ticket.deposit")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7337614+08:00", comments="Source field: ticket.deposit")
     public void setDeposit(Integer deposit) {
         this.deposit = deposit;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6922292+08:00", comments="Source field: ticket.create_date")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7337614+08:00", comments="Source field: ticket.create_date")
     public Date getCreateDate() {
         return createDate;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.693237+08:00", comments="Source field: ticket.create_date")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7347832+08:00", comments="Source field: ticket.create_date")
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.693237+08:00", comments="Source field: ticket.pickup_date")
-    public Date getPickupDate() {
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7347832+08:00", comments="Source field: ticket.pickup_date")
+    public String getPickupDate() {
         return pickupDate;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.693237+08:00", comments="Source field: ticket.pickup_date")
-    public void setPickupDate(Date pickupDate) {
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7347832+08:00", comments="Source field: ticket.pickup_date")
+    public void setPickupDate(String pickupDate) {
         this.pickupDate = pickupDate;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.693237+08:00", comments="Source field: ticket.close_date")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7347832+08:00", comments="Source field: ticket.close_date")
     public Date getCloseDate() {
         return closeDate;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.694243+08:00", comments="Source field: ticket.close_date")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7357777+08:00", comments="Source field: ticket.close_date")
     public void setCloseDate(Date closeDate) {
         this.closeDate = closeDate;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.694243+08:00", comments="Source field: ticket.item_a_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7357777+08:00", comments="Source field: ticket.item_a_count")
     public Integer getItemACount() {
         return itemACount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.694243+08:00", comments="Source field: ticket.item_a_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7357777+08:00", comments="Source field: ticket.item_a_count")
     public void setItemACount(Integer itemACount) {
         this.itemACount = itemACount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.694243+08:00", comments="Source field: ticket.item_b_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7357777+08:00", comments="Source field: ticket.item_b_count")
     public Integer getItemBCount() {
         return itemBCount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.694243+08:00", comments="Source field: ticket.item_b_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7357777+08:00", comments="Source field: ticket.item_b_count")
     public void setItemBCount(Integer itemBCount) {
         this.itemBCount = itemBCount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6952341+08:00", comments="Source field: ticket.item_c_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7357777+08:00", comments="Source field: ticket.item_c_count")
     public Integer getItemCCount() {
         return itemCCount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6952341+08:00", comments="Source field: ticket.item_c_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7367763+08:00", comments="Source field: ticket.item_c_count")
     public void setItemCCount(Integer itemCCount) {
         this.itemCCount = itemCCount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6952341+08:00", comments="Source field: ticket.item_d_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7367763+08:00", comments="Source field: ticket.item_d_count")
     public Integer getItemDCount() {
         return itemDCount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6952341+08:00", comments="Source field: ticket.item_d_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7367763+08:00", comments="Source field: ticket.item_d_count")
     public void setItemDCount(Integer itemDCount) {
         this.itemDCount = itemDCount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6952341+08:00", comments="Source field: ticket.temperature")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7367763+08:00", comments="Source field: ticket.temperature")
     public String getTemperature() {
         return temperature;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6952341+08:00", comments="Source field: ticket.temperature")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7367763+08:00", comments="Source field: ticket.temperature")
     public void setTemperature(String temperature) {
         this.temperature = temperature;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6952341+08:00", comments="Source field: ticket.apply_memo")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7377779+08:00", comments="Source field: ticket.apply_memo")
     public String getApplyMemo() {
         return applyMemo;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6962348+08:00", comments="Source field: ticket.apply_memo")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7377779+08:00", comments="Source field: ticket.apply_memo")
     public void setApplyMemo(String applyMemo) {
         this.applyMemo = applyMemo;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6962348+08:00", comments="Source field: ticket.item_e_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7377779+08:00", comments="Source field: ticket.item_e_count")
     public Integer getItemECount() {
         return itemECount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6962348+08:00", comments="Source field: ticket.item_e_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7377779+08:00", comments="Source field: ticket.item_e_count")
     public void setItemECount(Integer itemECount) {
         this.itemECount = itemECount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6962348+08:00", comments="Source field: ticket.item_f_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7377779+08:00", comments="Source field: ticket.item_f_count")
     public Integer getItemFCount() {
         return itemFCount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6962348+08:00", comments="Source field: ticket.item_f_count")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7377779+08:00", comments="Source field: ticket.item_f_count")
     public void setItemFCount(Integer itemFCount) {
         this.itemFCount = itemFCount;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6962348+08:00", comments="Source field: ticket.pickup")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7387745+08:00", comments="Source field: ticket.pickup")
     public String getPickup() {
         return pickup;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6962348+08:00", comments="Source field: ticket.pickup")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7387745+08:00", comments="Source field: ticket.pickup")
     public void setPickup(String pickup) {
         this.pickup = pickup;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6972377+08:00", comments="Source field: ticket.email")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7387745+08:00", comments="Source field: ticket.email")
     public String getEmail() {
         return email;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.6972377+08:00", comments="Source field: ticket.email")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7387745+08:00", comments="Source field: ticket.email")
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7387745+08:00", comments="Source field: ticket.update_time")
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7387745+08:00", comments="Source field: ticket.update_time")
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7397769+08:00", comments="Source field: ticket.change_log")
+    public String getChangeLog() {
+        return changeLog;
+    }
+
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7397769+08:00", comments="Source field: ticket.change_log")
+    public void setChangeLog(String changeLog) {
+        this.changeLog = changeLog;
     }
 }

@@ -21,17 +21,16 @@ public class ApplyUserTicketController {
     private final OrderService orderService;
 
     /**
-     * 審查
-     * @param query
+     * 狀態變更
+     *
      * @return
      */
-    @PostMapping("/apply")
-    public ApplyUserTickeReposeDTO apply(@RequestBody ApplyUserTickeRequestDTO query) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
+    @PostMapping("/updateStatus")
+    public ApplyUserTickeReposeDTO apply(@RequestBody ApplyStatusUserRequestDTO applyDTO) {
         ApplyUserTickeReposeDTO order = new ApplyUserTickeReposeDTO();
         try {
-            return orderService.apply(query);
+            orderService.apply(applyDTO);
+            return order;
         } catch (ApBusinessException e) {
             log.info("createOrder error", e);
             order.setExCode("X");
@@ -44,6 +43,7 @@ public class ApplyUserTicketController {
             return order;
         }
     }
+
     @PostMapping("/update")
     public ApplyUserTickeReposeDTO update(@RequestBody ApplyUserTickeRequestDTO query) {
         ApplyUserTickeReposeDTO order = new ApplyUserTickeReposeDTO();
@@ -61,22 +61,7 @@ public class ApplyUserTicketController {
             return order;
         }
     }
-    @PostMapping("/reject")
-    public ApplyUserTickeReposeDTO reject(@RequestBody ApplyUserTickeRequestDTO query) {
-        ApplyUserTickeReposeDTO order = new ApplyUserTickeReposeDTO();
-        try {
-            return orderService.reject(query);
-        } catch (ApBusinessException e) {
-            log.info("createOrder error", e);
-            order.setExCode("X");
-            order.setExMessage(e.getMessage());
-            return order;
-        } catch (Exception e) {
-            log.info("createOrder error", e);
-            order.setExCode("X");
-            order.setExMessage("系統異常");
-            return order;
-        }
-    }
+
+
 
 }

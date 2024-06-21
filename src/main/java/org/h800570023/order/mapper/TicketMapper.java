@@ -31,10 +31,10 @@ import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
 
 @Mapper
 public interface TicketMapper extends CommonCountMapper, CommonDeleteMapper, CommonInsertMapper<Ticket>, CommonUpdateMapper {
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7562607+08:00", comments="Source Table: ticket")
-    BasicColumn[] selectList = BasicColumn.columnList(transactionId, orderName, orderTel, customerMemo, status, total, deposit, createDate, pickupDate, closeDate, itemACount, itemBCount, itemCCount, itemDCount, temperature, applyMemo, itemECount, itemFCount, pickup, email);
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8079358+08:00", comments="Source Table: ticket")
+    BasicColumn[] selectList = BasicColumn.columnList(transactionId, orderName, orderTel, customerMemo, status, total, deposit, createDate, pickupDate, closeDate, itemACount, itemBCount, itemCCount, itemDCount, temperature, applyMemo, itemECount, itemFCount, pickup, email, updateTime, changeLog);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.725232+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7789405+08:00", comments="Source Table: ticket")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @Results(id="TicketResult", value = {
         @Result(column="transaction_id", property="transactionId", jdbcType=JdbcType.VARCHAR, id=true),
@@ -45,7 +45,7 @@ public interface TicketMapper extends CommonCountMapper, CommonDeleteMapper, Com
         @Result(column="total", property="total", jdbcType=JdbcType.INTEGER),
         @Result(column="deposit", property="deposit", jdbcType=JdbcType.INTEGER),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.DATE),
-        @Result(column="pickup_date", property="pickupDate", jdbcType=JdbcType.DATE),
+        @Result(column="pickup_date", property="pickupDate", jdbcType=JdbcType.CHAR),
         @Result(column="close_date", property="closeDate", jdbcType=JdbcType.DATE),
         @Result(column="item_a_count", property="itemACount", jdbcType=JdbcType.INTEGER),
         @Result(column="item_b_count", property="itemBCount", jdbcType=JdbcType.INTEGER),
@@ -56,33 +56,35 @@ public interface TicketMapper extends CommonCountMapper, CommonDeleteMapper, Com
         @Result(column="item_e_count", property="itemECount", jdbcType=JdbcType.INTEGER),
         @Result(column="item_f_count", property="itemFCount", jdbcType=JdbcType.INTEGER),
         @Result(column="pickup", property="pickup", jdbcType=JdbcType.VARCHAR),
-        @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR)
+        @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR),
+        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="change_log", property="changeLog", jdbcType=JdbcType.VARCHAR)
     })
     List<Ticket> selectMany(SelectStatementProvider selectStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7332328+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7879373+08:00", comments="Source Table: ticket")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @ResultMap("TicketResult")
     Optional<Ticket> selectOne(SelectStatementProvider selectStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7362302+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7899406+08:00", comments="Source Table: ticket")
     default long count(CountDSLCompleter completer) {
         return MyBatis3Utils.countFrom(this::count, ticket, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7382335+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7909388+08:00", comments="Source Table: ticket")
     default int delete(DeleteDSLCompleter completer) {
         return MyBatis3Utils.deleteFrom(this::delete, ticket, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7412374+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7929379+08:00", comments="Source Table: ticket")
     default int deleteByPrimaryKey(String transactionId_) {
         return delete(c -> 
             c.where(transactionId, isEqualTo(transactionId_))
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7422367+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.7939402+08:00", comments="Source Table: ticket")
     default int insert(Ticket row) {
         return MyBatis3Utils.insert(this::insert, row, ticket, c ->
             c.map(transactionId).toProperty("transactionId")
@@ -105,10 +107,12 @@ public interface TicketMapper extends CommonCountMapper, CommonDeleteMapper, Com
             .map(itemFCount).toProperty("itemFCount")
             .map(pickup).toProperty("pickup")
             .map(email).toProperty("email")
+            .map(updateTime).toProperty("updateTime")
+            .map(changeLog).toProperty("changeLog")
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7472359+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8009417+08:00", comments="Source Table: ticket")
     default int insertMultiple(Collection<Ticket> records) {
         return MyBatis3Utils.insertMultiple(this::insertMultiple, records, ticket, c ->
             c.map(transactionId).toProperty("transactionId")
@@ -131,10 +135,12 @@ public interface TicketMapper extends CommonCountMapper, CommonDeleteMapper, Com
             .map(itemFCount).toProperty("itemFCount")
             .map(pickup).toProperty("pickup")
             .map(email).toProperty("email")
+            .map(updateTime).toProperty("updateTime")
+            .map(changeLog).toProperty("changeLog")
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7502325+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8039415+08:00", comments="Source Table: ticket")
     default int insertSelective(Ticket row) {
         return MyBatis3Utils.insert(this::insert, row, ticket, c ->
             c.map(transactionId).toPropertyWhenPresent("transactionId", row::getTransactionId)
@@ -157,37 +163,39 @@ public interface TicketMapper extends CommonCountMapper, CommonDeleteMapper, Com
             .map(itemFCount).toPropertyWhenPresent("itemFCount", row::getItemFCount)
             .map(pickup).toPropertyWhenPresent("pickup", row::getPickup)
             .map(email).toPropertyWhenPresent("email", row::getEmail)
+            .map(updateTime).toPropertyWhenPresent("updateTime", row::getUpdateTime)
+            .map(changeLog).toPropertyWhenPresent("changeLog", row::getChangeLog)
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7612643+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8109388+08:00", comments="Source Table: ticket")
     default Optional<Ticket> selectOne(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectOne(this::selectOne, selectList, ticket, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7632601+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8136335+08:00", comments="Source Table: ticket")
     default List<Ticket> select(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectList(this::selectMany, selectList, ticket, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7662589+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8159723+08:00", comments="Source Table: ticket")
     default List<Ticket> selectDistinct(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectDistinct(this::selectMany, selectList, ticket, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7682599+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8183804+08:00", comments="Source Table: ticket")
     default Optional<Ticket> selectByPrimaryKey(String transactionId_) {
         return selectOne(c ->
             c.where(transactionId, isEqualTo(transactionId_))
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7708117+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8207131+08:00", comments="Source Table: ticket")
     default int update(UpdateDSLCompleter completer) {
         return MyBatis3Utils.update(this::update, ticket, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7728054+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8236675+08:00", comments="Source Table: ticket")
     static UpdateDSL<UpdateModel> updateAllColumns(Ticket row, UpdateDSL<UpdateModel> dsl) {
         return dsl.set(transactionId).equalTo(row::getTransactionId)
                 .set(orderName).equalTo(row::getOrderName)
@@ -208,10 +216,12 @@ public interface TicketMapper extends CommonCountMapper, CommonDeleteMapper, Com
                 .set(itemECount).equalTo(row::getItemECount)
                 .set(itemFCount).equalTo(row::getItemFCount)
                 .set(pickup).equalTo(row::getPickup)
-                .set(email).equalTo(row::getEmail);
+                .set(email).equalTo(row::getEmail)
+                .set(updateTime).equalTo(row::getUpdateTime)
+                .set(changeLog).equalTo(row::getChangeLog);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.774827+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8264451+08:00", comments="Source Table: ticket")
     static UpdateDSL<UpdateModel> updateSelectiveColumns(Ticket row, UpdateDSL<UpdateModel> dsl) {
         return dsl.set(transactionId).equalToWhenPresent(row::getTransactionId)
                 .set(orderName).equalToWhenPresent(row::getOrderName)
@@ -232,10 +242,12 @@ public interface TicketMapper extends CommonCountMapper, CommonDeleteMapper, Com
                 .set(itemECount).equalToWhenPresent(row::getItemECount)
                 .set(itemFCount).equalToWhenPresent(row::getItemFCount)
                 .set(pickup).equalToWhenPresent(row::getPickup)
-                .set(email).equalToWhenPresent(row::getEmail);
+                .set(email).equalToWhenPresent(row::getEmail)
+                .set(updateTime).equalToWhenPresent(row::getUpdateTime)
+                .set(changeLog).equalToWhenPresent(row::getChangeLog);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7778119+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8314697+08:00", comments="Source Table: ticket")
     default int updateByPrimaryKey(Ticket row) {
         return update(c ->
             c.set(orderName).equalTo(row::getOrderName)
@@ -257,11 +269,13 @@ public interface TicketMapper extends CommonCountMapper, CommonDeleteMapper, Com
             .set(itemFCount).equalTo(row::getItemFCount)
             .set(pickup).equalTo(row::getPickup)
             .set(email).equalTo(row::getEmail)
+            .set(updateTime).equalTo(row::getUpdateTime)
+            .set(changeLog).equalTo(row::getChangeLog)
             .where(transactionId, isEqualTo(row::getTransactionId))
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-13T17:15:49.7798128+08:00", comments="Source Table: ticket")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2024-06-20T16:14:24.8354783+08:00", comments="Source Table: ticket")
     default int updateByPrimaryKeySelective(Ticket row) {
         return update(c ->
             c.set(orderName).equalToWhenPresent(row::getOrderName)
@@ -283,6 +297,8 @@ public interface TicketMapper extends CommonCountMapper, CommonDeleteMapper, Com
             .set(itemFCount).equalToWhenPresent(row::getItemFCount)
             .set(pickup).equalToWhenPresent(row::getPickup)
             .set(email).equalToWhenPresent(row::getEmail)
+            .set(updateTime).equalToWhenPresent(row::getUpdateTime)
+            .set(changeLog).equalToWhenPresent(row::getChangeLog)
             .where(transactionId, isEqualTo(row::getTransactionId))
         );
     }
